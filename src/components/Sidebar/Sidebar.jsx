@@ -3,8 +3,12 @@ import {
   LaptopOutlined,
   NotificationOutlined,
   UserOutlined,
+  PlusOutlined,
+  MailOutlined,
 } from "@ant-design/icons";
-import { DatePicker, Layout, Menu, theme } from "antd";
+import { Button, Layout, Menu, theme } from "antd";
+import Search from "antd/es/input/Search";
+import ChooseCalendar from "../ChooseCalendar/ChooseCalendar";
 
 const { Header, Content, Sider } = Layout;
 
@@ -25,6 +29,7 @@ const items2 = icons.map((icon, index) => {
     label: `${label}`,
   };
 });
+const onSearch = (value, _e, info) => console.log(info?.source, value);
 
 const Sidebar = () => {
   const {
@@ -78,18 +83,52 @@ const Sidebar = () => {
               padding: 24,
               margin: 0,
               minHeight: "80vh",
-              background: colorBgContainer,
+              background: "#f0f0f0",
               borderRadius: borderRadiusLG,
             }}
           >
-            <Layout>
+            <Layout
+              style={{
+                border: "1px solid gray",
+                borderRadius: "1rem",
+                background: "#fff",
+                marginBottom: "1rem",
+              }}
+            >
               <div
                 style={{
                   display: "flex",
+                  justifyContent: "space-between",
+                  padding: ".5rem",
                 }}
               >
-                <DatePicker />
-              </div>{" "}
+                <div>
+                  <Search
+                    placeholder="input search text"
+                    onSearch={onSearch}
+                    enterButton
+                  />
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    background: "white",
+                    gap: "1rem",
+                  }}
+                >
+                  <Button type="primary" icon={<PlusOutlined />}>
+                    Add Your Task
+                  </Button>
+                  <MailOutlined />
+                  <UserOutlined />
+                </div>
+              </div>
+            </Layout>
+            <Layout>
+              <div className="first-section">
+                <ChooseCalendar />
+              </div>
             </Layout>
           </Content>
         </Layout>
